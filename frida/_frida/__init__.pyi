@@ -774,4 +774,94 @@ class Compiler(Object):
         """
         ...
 
+class PackageManager(Object):
+    @property
+    def registry(self) -> str:
+        """
+        The registry being used.
+        """
+        ...
+
+    @registry.setter
+    def registry(self, value: str) -> None:
+        """
+        Change the registry to use.
+        """
+        ...
+
+    def search(
+        self,
+        query: str,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
+    ) -> PackageSearchResult:
+        """
+        Search for packages to install.
+        """
+        ...
+
+    def install(
+        self,
+        project_root: Optional[str] = None,
+        role: Optional[str] = None,
+        specs: Optional[Sequence[str]] = None,
+        omits: Optional[Sequence[str]] = None,
+    ) -> PackageInstallResult:
+        """
+        Install one or more packages.
+        """
+        ...
+
+class Package(Object):
+    @property
+    def name(self) -> str:
+        """
+        Package name.
+        """
+        ...
+
+    @property
+    def version(self) -> str:
+        """
+        Package version.
+        """
+        ...
+
+    @property
+    def description(self) -> Optional[str]:
+        """
+        Package description.
+        """
+        ...
+
+    @property
+    def url(self) -> Optional[str]:
+        """
+        Package URL.
+        """
+        ...
+
+class PackageSearchResult(Object):
+    @property
+    def packages(self) -> List[Package]:
+        """
+        Batch of matching packages.
+        """
+        ...
+
+    @property
+    def total(self) -> int:
+        """
+        Total matching packages.
+        """
+        ...
+
+class PackageInstallResult(Object):
+    @property
+    def packages(self) -> List[Package]:
+        """
+        The toplevel packages that are installed.
+        """
+        ...
+
 __version__: str
